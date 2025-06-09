@@ -109,7 +109,7 @@ namespace Videojuegos_Plataformas
                 }
             }
 
-            // Recargar para actualizar estado
+            // Recargar para actualizar 
             CargarAsociaciones(videojuegoID);
         }
     }
