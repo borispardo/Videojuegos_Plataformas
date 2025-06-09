@@ -106,7 +106,7 @@ namespace Videojuegos_Plataformas
 
         protected void gvVideojuegos_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            // Esta función no se usa, el botón "Editar" carga datos en el formulario para luego guardar.
+            // Esta función no se usa, botón "Editar" carga datos en el formulario para luego guardar.
             
         }
     }
