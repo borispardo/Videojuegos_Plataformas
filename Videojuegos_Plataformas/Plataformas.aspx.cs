@@ -97,7 +97,7 @@ namespace Videojuegos_Plataformas
 
         protected void gvPlataformas_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            // Vacío intencionalmente: el botón de edición carga el formulario superior
+            // El botón de edición carga el formulario superior
         }
     }
 }
