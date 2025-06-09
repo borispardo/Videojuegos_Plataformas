@@ -21,8 +21,8 @@ namespace Videojuegos_Plataformas
         private void CargarVideojuegos()
         {
             using (SqlConnection con = new SqlConnection(conexion))
+            using (SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Videojuego", con))
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Videojuego", con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 gvVideojuegos.DataSource = dt;
@@ -35,23 +35,14 @@ namespace Videojuegos_Plataformas
             using (SqlConnection con = new SqlConnection(conexion))
             {
                 con.Open();
-                string query;
-
-                if (string.IsNullOrEmpty(hfID.Value))
-                {
-                    // Insertar
-                    query = "INSERT INTO Videojuego (Titulo, Desarrollador, Lanzamiento) VALUES (@Titulo, @Desarrollador, @Lanzamiento)";
-                }
-                else
-                {
-                    // Actualizar
-                    query = "UPDATE Videojuego SET Titulo=@Titulo, Desarrollador=@Desarrollador, Lanzamiento=@Lanzamiento WHERE VideojuegoID=@ID";
-                }
+                string query = string.IsNullOrEmpty(hfID.Value)
+                    ? "INSERT INTO Videojuego (Titulo, Desarrollador, Lanzamiento) VALUES (@Titulo, @Desarrollador, @Lanzamiento)"
+                    : "UPDATE Videojuego SET Titulo=@Titulo, Desarrollador=@Desarrollador, Lanzamiento=@Lanzamiento WHERE VideojuegoID=@ID";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    cmd.Parameters.AddWithValue("@Titulo", txtTitulo.Text);
-                    cmd.Parameters.AddWithValue("@Desarrollador", txtDesarrollador.Text);
+                    cmd.Parameters.AddWithValue("@Titulo", txtTitulo.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Desarrollador", txtDesarrollador.Text.Trim());
                     cmd.Parameters.AddWithValue("@Lanzamiento", txtFecha.Text);
 
                     if (!string.IsNullOrEmpty(hfID.Value))
@@ -59,6 +50,7 @@ namespace Videojuegos_Plataformas
 
                     cmd.ExecuteNonQuery();
                 }
+
                 LimpiarFormulario();
                 CargarVideojuegos();
             }
@@ -83,12 +75,15 @@ namespace Videojuegos_Plataformas
             hfID.Value = gvVideojuegos.DataKeys[e.NewEditIndex].Value.ToString();
             txtTitulo.Text = fila.Cells[0].Text;
             txtDesarrollador.Text = fila.Cells[1].Text;
-            txtFecha.Text = DateTime.Parse(fila.Cells[2].Text).ToString("yyyy-MM-dd");
+
+            if (DateTime.TryParse(fila.Cells[2].Text, out DateTime fecha))
+                txtFecha.Text = fecha.ToString("yyyy-MM-dd");
         }
 
         protected void gvVideojuegos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int id = Convert.ToInt32(gvVideojuegos.DataKeys[e.RowIndex].Value);
+
             using (SqlConnection con = new SqlConnection(conexion))
             {
                 con.Open();
@@ -96,6 +91,7 @@ namespace Videojuegos_Plataformas
                 cmd.Parameters.AddWithValue("@ID", id);
                 cmd.ExecuteNonQuery();
             }
+
             CargarVideojuegos();
         }
 
@@ -106,8 +102,7 @@ namespace Videojuegos_Plataformas
 
         protected void gvVideojuegos_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            // Esta función no se usa, botón "Editar" carga datos en el formulario para luego guardar.
-            
+            // Método no utilizado porque la edición se hace en el formulario.
         }
     }
 }
