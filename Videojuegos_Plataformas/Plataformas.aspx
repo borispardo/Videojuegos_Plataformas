@@ -55,7 +55,7 @@
     <form id="form1" runat="server">
         <h2>Gestión de Plataformas</h2>
 
-        <div class="form-container">
+        <div class="form-container"> 
             <asp:HiddenField ID="hfPlataformaID" runat="server" />
 
             <asp:Label ID="lblNombre" runat="server" Text="Nombre de Plataforma:" />
