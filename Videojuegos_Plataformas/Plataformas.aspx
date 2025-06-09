@@ -38,6 +38,7 @@
             border-radius: 4px;
             cursor: pointer;
             margin-right: 5px;
+
         }
         .form-container input[type="submit"]:hover,
         .form-container input[type="button"]:hover {
