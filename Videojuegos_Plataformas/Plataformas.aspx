@@ -49,7 +49,7 @@
             padding: 10px;
             border-radius: 8px;
         }
-    </style>
+    </style> 
 </head>
 <body>
     <form id="form1" runat="server">
