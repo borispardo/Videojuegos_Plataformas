@@ -53,7 +53,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <h2>Gestión de Plataformas</h2>
+        <h2>Gestión de Plataformas</h2>  
 
         <div class="form-container"> 
             <asp:HiddenField ID="hfPlataformaID" runat="server" />
