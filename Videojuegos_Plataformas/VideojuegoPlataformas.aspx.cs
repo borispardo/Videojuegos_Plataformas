@@ -16,14 +16,15 @@ namespace Videojuegos_Plataformas
             {
                 CargarVideojuegos();
                 CargarPlataformas();
+                CargarGridAsociaciones();  // Cargar tabla al iniciar
             }
         }
 
         private void CargarVideojuegos()
         {
             using (SqlConnection con = new SqlConnection(conexion))
+            using (SqlDataAdapter da = new SqlDataAdapter("SELECT VideojuegoID, Titulo FROM Videojuego", con))
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT VideojuegoID, Titulo FROM Videojuego", con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 ddlVideojuegos.DataSource = dt;
@@ -37,8 +38,8 @@ namespace Videojuegos_Plataformas
         private void CargarPlataformas()
         {
             using (SqlConnection con = new SqlConnection(conexion))
+            using (SqlDataAdapter da = new SqlDataAdapter("SELECT PlataformaID, Nombre FROM Plataforma", con))
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT PlataformaID, Nombre FROM Plataforma", con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 cblPlataformas.DataSource = dt;
@@ -50,26 +51,22 @@ namespace Videojuegos_Plataformas
 
         private void CargarAsociaciones(int videojuegoID)
         {
-            // Limpiar selección actual
             foreach (ListItem item in cblPlataformas.Items)
-            {
                 item.Selected = false;
-            }
 
             using (SqlConnection con = new SqlConnection(conexion))
             {
+                con.Open();
                 SqlCommand cmd = new SqlCommand("SELECT PlataformaID FROM VideojuegoPlataforma WHERE VideojuegoID = @VideojuegoID", con);
                 cmd.Parameters.AddWithValue("@VideojuegoID", videojuegoID);
-                con.Open();
+
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string id = reader["PlataformaID"].ToString();
-                    ListItem item = cblPlataformas.Items.FindByValue(id);
+                    string plataformaID = reader["PlataformaID"].ToString();
+                    ListItem item = cblPlataformas.Items.FindByValue(plataformaID);
                     if (item != null)
-                    {
                         item.Selected = true;
-                    }
                 }
             }
         }
@@ -91,7 +88,7 @@ namespace Videojuegos_Plataformas
             {
                 con.Open();
 
-                // Eliminar asociaciones anteriores
+                // Eliminar asociaciones previas
                 SqlCommand deleteCmd = new SqlCommand("DELETE FROM VideojuegoPlataforma WHERE VideojuegoID = @VideojuegoID", con);
                 deleteCmd.Parameters.AddWithValue("@VideojuegoID", videojuegoID);
                 deleteCmd.ExecuteNonQuery();
@@ -109,8 +106,31 @@ namespace Videojuegos_Plataformas
                 }
             }
 
-            // Recargar para actualizar Videojuegos en 
+            // Refrescar la selección actual
             CargarAsociaciones(videojuegoID);
+
+            // Refrescar tabla de asociaciones
+            CargarGridAsociaciones();
+        }
+
+        private void CargarGridAsociaciones()
+        {
+            using (SqlConnection con = new SqlConnection(conexion))
+            {
+                string consulta = @"
+                    SELECT v.Titulo AS Videojuego, p.Nombre AS Plataforma
+                    FROM VideojuegoPlataforma vp
+                    INNER JOIN Videojuego v ON vp.VideojuegoID = v.VideojuegoID
+                    INNER JOIN Plataforma p ON vp.PlataformaID = p.PlataformaID
+                    ORDER BY v.Titulo, p.Nombre";
+
+                SqlDataAdapter da = new SqlDataAdapter(consulta, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                gvAsociaciones.DataSource = dt;
+                gvAsociaciones.DataBind();
+            }
         }
     }
 }

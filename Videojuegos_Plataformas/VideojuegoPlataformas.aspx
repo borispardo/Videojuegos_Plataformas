@@ -1,66 +1,31 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VideojuegoPlataformas.aspx.cs" Inherits="Videojuegos_Plataformas.VideojuegoPlataformas" %>
+﻿<%@ Page Title="Asociar Videojuegos y Plataformas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VideojuegoPlataformas.aspx.cs" Inherits="Videojuegos_Plataformas.VideojuegoPlataformas" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta charset="utf-8" />
-    <title>Asociar Videojuegos con Plataformas</title>
-    <style>
-        body {
-            font-family: Arial;
-            margin: 30px;
-            background-color: #f4f4f4;
-        }
-        h2 {
-            color: #333;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            width: 500px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label,
-        .form-group select {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .btn {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 6px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <h2>Asociar Videojuegos con Plataformas</h2>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container mt-4">
+        <h2 class="mb-4 text-primary">Asociar Videojuegos con Plataformas</h2>
 
-        <div class="container">
-            <div class="form-group">
-                <asp:Label ID="lblVideojuego" runat="server" Text="Selecciona un Videojuego:" />
-                <asp:DropDownList ID="ddlVideojuegos" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVideojuegos_SelectedIndexChanged" />
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="mb-3">
+                    <asp:Label ID="lblVideojuego" runat="server" Text="Selecciona un Videojuego:" CssClass="form-label" />
+                    <asp:DropDownList ID="ddlVideojuegos" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlVideojuegos_SelectedIndexChanged" />
+                </div>
+
+                <div class="mb-3">
+                    <asp:Label ID="lblPlataformas" runat="server" Text="Plataformas disponibles:" CssClass="form-label" />
+                    <asp:CheckBoxList ID="cblPlataformas" runat="server" CssClass="form-check"
+                        RepeatDirection="Vertical" RepeatLayout="Table" />
+                </div>
+
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar Asociaciones" CssClass="btn btn-success me-2" OnClick="btnGuardar_Click" />
             </div>
-
-            <div class="form-group">
-                <asp:Label ID="lblPlataformas" runat="server" Text="Plataformas disponibles:" />
-                <asp:CheckBoxList ID="cblPlataformas" runat="server" />
-            </div>
-
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar Asociaciones" CssClass="btn" OnClick="btnGuardar_Click" />
         </div>
-    </form>
-</body>
-</html>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="text-secondary mb-3">Asociaciones registradas</h4>
+                <asp:GridView ID="gvAsociaciones" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="true" />
+            </div>
+        </div>
+    </div>
+</asp:Content>

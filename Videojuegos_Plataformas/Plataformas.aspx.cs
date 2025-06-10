@@ -8,7 +8,7 @@ namespace Videojuegos_Plataformas
 {
     public partial class Plataformas : System.Web.UI.Page
     {
-        private readonly string conexion = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
+        string conexion = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +39,7 @@ namespace Videojuegos_Plataformas
             {
                 con.Open();
 
-                string query = string.IsNullOrEmpty(hfPlataformaID.Value)
+                string query = string.IsNullOrEmpty(hfID.Value)
                     ? "INSERT INTO Plataforma (Nombre) VALUES (@Nombre)"
                     : "UPDATE Plataforma SET Nombre = @Nombre WHERE PlataformaID = @ID";
 
@@ -47,8 +47,8 @@ namespace Videojuegos_Plataformas
                 {
                     cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text.Trim());
 
-                    if (!string.IsNullOrEmpty(hfPlataformaID.Value))
-                        cmd.Parameters.AddWithValue("@ID", Convert.ToInt32(hfPlataformaID.Value));
+                    if (!string.IsNullOrEmpty(hfID.Value))
+                        cmd.Parameters.AddWithValue("@ID", Convert.ToInt32(hfID.Value));
 
                     cmd.ExecuteNonQuery();
                 }
@@ -65,17 +65,15 @@ namespace Videojuegos_Plataformas
 
         private void LimpiarFormulario()
         {
-            txtNombre.Text = string.Empty;
-            hfPlataformaID.Value = string.Empty;
+            txtNombre.Text = "";
+            hfID.Value = "";
         }
 
         protected void gvPlataformas_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            int index = e.NewEditIndex;
-            hfPlataformaID.Value = gvPlataformas.DataKeys[index].Value.ToString();
-            txtNombre.Text = gvPlataformas.Rows[index].Cells[0].Text;
-
-            // También puedes agregar scroll a top con JavaScript si deseas
+            GridViewRow fila = gvPlataformas.Rows[e.NewEditIndex];
+            hfID.Value = gvPlataformas.DataKeys[e.NewEditIndex].Value.ToString();
+            txtNombre.Text = fila.Cells[0].Text;
         }
 
         protected void gvPlataformas_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -85,11 +83,9 @@ namespace Videojuegos_Plataformas
             using (SqlConnection con = new SqlConnection(conexion))
             {
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand("DELETE FROM Plataforma WHERE PlataformaID = @ID", con))
-                {
-                    cmd.Parameters.AddWithValue("@ID", id);
-                    cmd.ExecuteNonQuery();
-                }
+                SqlCommand cmd = new SqlCommand("DELETE FROM Plataforma WHERE PlataformaID = @ID", con);
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.ExecuteNonQuery();
             }
 
             CargarPlataformas();
@@ -102,7 +98,7 @@ namespace Videojuegos_Plataformas
 
         protected void gvPlataformas_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            // La edición se maneja desde el formulario superior
+            // No se utiliza porque la edición se hace desde el formulario superior.
         }
     }
 }

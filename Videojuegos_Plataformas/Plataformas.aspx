@@ -1,106 +1,38 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Plataformas.aspx.cs" Inherits="Videojuegos_Plataformas.Plataformas" %>
+﻿<%@ Page Title="Gestión de Plataformas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Plataformas.aspx.cs" Inherits="Videojuegos_Plataformas.Plataformas" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta charset="utf-8" />
-    <title>Gestión de Plataformas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-            background-color: #f4f4f4;
-        }
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container mt-4">
+        <h2 class="mb-4 text-primary">Gestión de Plataformas</h2>
 
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <asp:HiddenField ID="hfID" runat="server" />
 
-        .form-container {
-            background-color: #ffffff;
-            padding: 20px;
-            width: 400px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+                <div class="mb-3">
+                    <asp:Label ID="lblNombre" runat="server" Text="Nombre de Plataforma:" CssClass="form-label" />
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+                </div>
 
-        .form-container label,
-        .form-container input[type="text"] {
-            display: block;
-            width: 100%;
-        }
-
-        .form-container input[type="text"] {
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .form-container input[type="submit"],
-        .form-container input[type="button"],
-        .form-container .aspNetButton {
-            padding: 8px 16px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .form-container input[type="submit"]:hover,
-        .form-container input[type="button"]:hover,
-        .form-container .aspNetButton:hover {
-            background-color: #0056b3;
-        }
-
-        .grid-container {
-            background-color: #ffffff;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .grid-container .aspNetGrid {
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <h2>Gestión de Plataformas</h2>
-
-        <div class="form-container">
-            <asp:HiddenField ID="hfPlataformaID" runat="server" />
-
-            <asp:Label ID="lblNombre" runat="server" Text="Nombre de Plataforma:" />
-            <asp:TextBox ID="txtNombre" runat="server" />
-
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="aspNetButton" OnClick="btnGuardar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="aspNetButton" OnClick="btnCancelar_Click" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success me-2" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelar_Click" />
+            </div>
         </div>
 
-        <div class="grid-container">
-            <asp:GridView ID="gvPlataformas" runat="server" AutoGenerateColumns="False"
-                CssClass="aspNetGrid"
-                DataKeyNames="PlataformaID"
-                OnRowEditing="gvPlataformas_RowEditing"
-                OnRowDeleting="gvPlataformas_RowDeleting"
-                OnRowCancelingEdit="gvPlataformas_RowCancelingEdit"
-                OnRowUpdating="gvPlataformas_RowUpdating">
-                <Columns>
-                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                    <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
-                </Columns>
-            </asp:GridView>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <asp:GridView ID="gvPlataformas" runat="server" CssClass="table table-bordered table-striped"
+                    AutoGenerateColumns="False"
+                    DataKeyNames="PlataformaID"
+                    OnRowEditing="gvPlataformas_RowEditing"
+                    OnRowDeleting="gvPlataformas_RowDeleting"
+                    OnRowCancelingEdit="gvPlataformas_RowCancelingEdit"
+                    OnRowUpdating="gvPlataformas_RowUpdating">
+                    <Columns>
+                        <asp:BoundField DataField="Nombre" HeaderText="Nombre de Plataforma" />
+                        <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
+                    </Columns>
+                </asp:GridView>
+            </div>
         </div>
-    </form>
-</body>
-</html>
+    </div>
+</asp:Content>
