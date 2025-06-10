@@ -7,7 +7,7 @@
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <div class="mb-3">
-                    <asp:Label ID="lblVideojuego" runat="server" Text="Selecciona un Videojuego:" CssClass="form-label" />
+                    <asp:Label ID="lblVideojuego" runat="server" Text="Selecciona un Videojuego de tu gusto:" CssClass="form-label" />
                     <asp:DropDownList ID="ddlVideojuegos" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlVideojuegos_SelectedIndexChanged" />
                 </div>
 
