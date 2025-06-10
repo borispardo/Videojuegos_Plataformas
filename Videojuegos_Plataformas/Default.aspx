@@ -22,7 +22,7 @@
             <div class="card h-100 border-0 shadow-lg rounded-4">
                 <div class="card-body text-center">
                     <div class="display-6 mb-3">🕹️</div>
-                    <h5 class="card-title fw-semibold">Plataformas</h5>
+                    <h5 class="card-title fw-semibold">Plataformas de videojuegos</h5>
                     <p class="card-text text-muted">Gestiona plataformas como PS5, Xbox, PC, etc.</p>
                     <a href="Plataformas.aspx" class="btn btn-outline-success rounded-pill px-4">Ir a Plataformas</a>
                 </div>
