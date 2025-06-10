@@ -1,38 +1,41 @@
-﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Videojuegos_Plataformas._Default" %>
-
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="text-center mt-5">
-        <h1 class="display-4">🎮 Bienvenido al sistema de Videojuegos y Plataformas</h1>
-        <p class="lead mt-3">
-            Administra fácilmente tus videojuegos, las plataformas donde están disponibles y sus asociaciones.
+﻿<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="text-center my-5">
+        <h1 class="display-4 fw-bold">🎮 Bienvenido al sistema</h1>
+        <p class="lead mt-3 mb-4 text-secondary">
+            Administra tus videojuegos, plataformas y asociaciones de forma sencilla.
         </p>
     </div>
 
-    <div class="row text-center mt-5">
+    <div class="row g-4 justify-content-center">
         <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">📋 Videojuegos</h5>
-                    <p class="card-text">Agrega, edita y elimina información sobre videojuegos disponibles.</p>
-                    <a href="Videojuegos.aspx" class="btn btn-primary">Ir a Videojuegos</a>
+            <div class="card h-100 border-0 shadow-lg rounded-4">
+                <div class="card-body text-center">
+                    <div class="display-6 mb-3">📋</div>
+                    <h5 class="card-title fw-semibold">Videojuegos</h5>
+                    <p class="card-text text-muted">Agrega, edita o elimina videojuegos de tu catálogo.</p>
+                    <a href="Videojuegos.aspx" class="btn btn-outline-primary rounded-pill px-4">Ir a Videojuegos</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mt-4 mt-md-0">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">🕹️ Plataformas</h5>
-                    <p class="card-text">Gestiona las plataformas como PS5, Xbox, PC y más.</p>
-                    <a href="Plataformas.aspx" class="btn btn-success">Ir a Plataformas</a>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-lg rounded-4">
+                <div class="card-body text-center">
+                    <div class="display-6 mb-3">🕹️</div>
+                    <h5 class="card-title fw-semibold">Plataformas</h5>
+                    <p class="card-text text-muted">Gestiona plataformas como PS5, Xbox, PC, etc.</p>
+                    <a href="Plataformas.aspx" class="btn btn-outline-success rounded-pill px-4">Ir a Plataformas</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mt-4 mt-md-0">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">🔗 Asociaciones</h5>
-                    <p class="card-text">Relaciona los videojuegos con sus plataformas disponibles.</p>
-                    <a href="VideojuegoPlataformas.aspx" class="btn btn-warning">Ir a Asociaciones</a>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-lg rounded-4">
+                <div class="card-body text-center">
+                    <div class="display-6 mb-3">🔗</div>
+                    <h5 class="card-title fw-semibold">Asociaciones</h5>
+                    <p class="card-text text-muted">Relaciona videojuegos con sus plataformas.</p>
+                    <a href="VideojuegoPlataformas.aspx" class="btn btn-outline-warning rounded-pill px-4">Ir a Asociaciones</a>
                 </div>
             </div>
         </div>
