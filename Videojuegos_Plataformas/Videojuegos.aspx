@@ -23,7 +23,7 @@
                     <asp:TextBox ID="txtFecha" runat="server" TextMode="Date" CssClass="form-control" />
                 </div>
 
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success me-2" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar videojuego" CssClass="btn btn-success me-2" OnClick="btnGuardar_Click" />
                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnCancelar_Click" />
             </div>
         </div>
