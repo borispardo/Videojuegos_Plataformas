@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mt-4">
-        <h2 class="mb-4 text-primary">Gestión de Plataformas</h2>
+        <h2 class="mb-4 text-primary">Gestión de Plataformas para videojuegos</h2>
 
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
