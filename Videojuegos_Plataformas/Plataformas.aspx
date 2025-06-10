@@ -9,7 +9,7 @@
                 <asp:HiddenField ID="hfID" runat="server" />
 
                 <div class="mb-3">
-                    <asp:Label ID="lblNombre" runat="server" Text="Nombre de Plataforma:" CssClass="form-label" />
+                    <asp:Label ID="lblNombre" runat="server" Text="Nombre de las Plataformas:" CssClass="form-label" />
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
                 </div>
 
